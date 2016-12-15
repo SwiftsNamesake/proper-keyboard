@@ -1,11 +1,11 @@
 
 -- API -------------------------------------------------------------------------------------------------------------------------------------
 
-module Key exposing (..)
+module Keyboard.Key exposing (..)
 {-| Readable key names
 
 # Definition
-@docs Key
+@docs Key, Side
 
 #
 @docs fromCode
@@ -22,18 +22,24 @@ import Keyboard exposing (KeyCode)
 -- TODO | - Complete the set
 --        - Categories and groups (eg. NumPad Int | Letter Char)
 --        - Distinguishing duplicates (LeftCtrl | RightCtrl | LeftAlt | RightAlt)
+--        - Should there be an AltLeft/AltRight?
+--        - How do we deal with AltrGr?
 type Key =   A | B | C | D | E | F | G | H | I | J
            | K | L | M | N | O | P | Q | R | S | T
            | U | V | W | X | Y | Z
            | Left | Right | Up | Down
-           | Shift | Ctrl | Alt
+           | Shift (Maybe Side) | Ctrl (Maybe Side) | Alt
            | Tab | CapsLock
            | Enter | Backspace
            | Delete | PageUp | PageDown | End | Home
-           | Ambiguous (List Key) -- TODO: Pattern synonyms?
            | Insert | PrintScreen | PauseBreak
            | Windows | Command | ChromeSearch
+           | Ambiguous (List Key) -- TODO: Pattern synonyms?
            | Unknown KeyCode -- | Special _
+
+
+{-| Type used to distinguish between multiple instances of the same key (such as Left Ctrl and Right Ctrl) -}
+type Side = LeftHand | RightHand
 
 -- Definitions -----------------------------------------------------------------------------------------------------------------------------
 
@@ -45,13 +51,13 @@ fromCode code = case code of
   13 -> Enter
 
   -- Modifiers
-  16 -> Shift
-  17 -> Ctrl
+  16 -> Shift Nothing
+  17 -> Ctrl  Nothing
   18 -> Alt
 
   --
   32-> Backspace
-  
+
   --
   33 -> PageUp
   34 -> PageDown
