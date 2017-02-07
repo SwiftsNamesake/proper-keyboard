@@ -29,13 +29,13 @@ type Key =   A | B | C | D | E | F | G | H | I | J
            | U | V | W | X | Y | Z
            | Left | Right | Up | Down
            | Shift (Maybe Side) | Ctrl (Maybe Side) | Alt
-           | Tab | CapsLock
+           | Tab | CapsLock | Esc
            | Enter | Backspace
            | Delete | PageUp | PageDown | End | Home
            | Insert | PrintScreen | PauseBreak
            | Windows | Command | ChromeSearch
            | Ambiguous (List Key) -- TODO: Pattern synonyms?
-           | Unknown KeyCode -- | Special _
+           | Unknown KeyCode  -- | Special _
 
 
 {-| Type used to distinguish between multiple instances of the same key (such as Left Ctrl and Right Ctrl) -}
@@ -54,6 +54,7 @@ fromCode code = case code of
   16 -> Shift Nothing
   17 -> Ctrl  Nothing
   18 -> Alt
+  27 -> Esc
 
   --
   32-> Backspace
@@ -102,10 +103,10 @@ fromCode code = case code of
   89 -> Y
   90 -> Z
 
+
   -- System
   91 -> Ambiguous [Windows, Command, ChromeSearch]
 
   -- Miscellaneous
   _ -> Unknown code
 
--- Tests -----------------------------------------------------------------------------------------------------------------------------------
