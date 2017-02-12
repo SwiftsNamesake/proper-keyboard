@@ -2,7 +2,7 @@
 -- API -------------------------------------------------------------------------------------------------------------------------------------
 
 module Keyboard.Key exposing (..)
-{-| Readable key names
+{-| Readable and typesafe key names
 
 # Definition
 @docs Key, Side
@@ -23,14 +23,15 @@ import Keyboard exposing (KeyCode)
 --        - Categories and groups (eg. NumPad Int | Letter Char)
 --        - Distinguishing duplicates (LeftCtrl | RightCtrl | LeftAlt | RightAlt)
 --        - Should there be an AltLeft/AltRight?
---        - How do we deal with AltrGr?
+--        - How do we deal with AltGr?
 --        - How do we deal with Numeric?
+--        - Sort out the logical grouping
 type Key =   A | B | C | D | E | F | G | H | I | J
            | K | L | M | N | O | P | Q | R | S | T
            | U | V | W | X | Y | Z
            | Left | Right | Up | Down
            | Shift (Maybe Side) | Ctrl (Maybe Side) | Alt
-           | Tab | CapsLock
+           | Tab | CapsLock | Escape
            | Enter | Backspace
            | Delete | PageUp | PageDown | End | Home
            | Zero | One | Two | Three | Four | Five | Six | Seven | Eight | Nine
@@ -63,6 +64,9 @@ fromCode code = case code of
   18 -> Alt
   19 -> PauseBreak
   20 -> CapsLock
+
+  --
+  27 -> Escape
 
   --
   32 -> Backspace
@@ -148,6 +152,9 @@ code key = case key of
   Alt     -> Just 18
   PauseBreak -> Just 19
   CapsLock   -> Just 20
+
+  --
+  Escape -> Just 27  
 
   --
   Backspace -> Just 32
