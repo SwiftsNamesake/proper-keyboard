@@ -95,7 +95,7 @@ fromCode code = case code of
   27 -> Escape
 
   --
-  32 -> Backspace
+  32 -> Spacebar
 
   --
   33 -> PageUp
@@ -204,7 +204,7 @@ code : Key -> Maybe KeyCode
 code key = case key of
 
   --
-  Spacebar -> Just 8
+  Backspace -> Just 8
   Tab      -> Just 9
 
   --
@@ -221,7 +221,7 @@ code key = case key of
   Escape -> Just 27  
 
   --
-  Backspace -> Just 32
+  Spacebar -> Just 32
 
   -- Navigation
   PageUp   -> Just 33
