@@ -1,5 +1,5 @@
 {
-    "version": "3.0.0",
+    "version": "3.0.1",
     "summary": "Introduces type-safe keys",
     "repository": "https://github.com/SwiftsNamesake/proper-keyboard.git",
     "license": "BSD3",
